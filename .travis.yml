@@ -3,7 +3,6 @@ node_js:
   - 4
   - 5
 sudo: false
-before_install: npm install -g gulp
 before_script:
   - npm install -g bower karma gulp
   - npm install
