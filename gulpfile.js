@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     uglifySaveLicense = require('uglify-save-license'),
     sourcemaps = require('gulp-sourcemaps'),
-    karma = require('karma');
+    server = require('karma').server;
 
 gulp.task('build', function() {
     return gulp.src('src/angular.lastfm.js')
@@ -31,7 +31,7 @@ gulp.task('clean', function() {
  * Run test once and exit
  */
 gulp.task('test', function (done) {
-    new Server({
+    new server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
     }, done).start();
