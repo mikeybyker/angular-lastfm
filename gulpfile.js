@@ -54,4 +54,5 @@ gulp.task('test', function(done) {
     runTests(true, done);
 });
 
-gulp.task('default', gulp.series('clean', 'build'));
+// gulp.task('default', gulp.series('clean', 'build')); gulp 4
+gulp.task('default', ['clean', 'build']);
