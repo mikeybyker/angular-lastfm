@@ -1,4 +1,7 @@
 # Angular LastFM
+
+[![Build Status](https://travis-ci.org/mikeybyker/angular-lastfm.svg?branch=master)](https://travis-ci.org/mikeybyker/angular-lastfm)
+
 An Angular LastFm API service. The services covered are those not requiring authentication. A [Last.FM](http://www.last.fm/api) API Key is required.
 
 ### Usage
