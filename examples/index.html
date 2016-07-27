@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Angular LastFM</title>
+        <meta name="description" content="View results from various last.fm api calls">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation-flex.min.css">
+        <style>
+            html,
+            body
+            {
+                height: 100%;
+            }
+            [ng\:cloak],
+            [ng-cloak],
+            [data-ng-cloak],
+            [x-ng-cloak],
+            .ng-cloak,
+            .x-ng-cloak
+            {
+                display: none !important;
+            }
+            [ng-click],
+            [data-ng-click],
+            [x-ng-click] {
+                cursor: pointer;
+            }
+
+            h1
+            {
+                font-size: 1.5rem;
+                margin: .5rem 0;
+            }
+            .container
+            {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-content: space-around;
+            }
+
+            .bottom-row
+            {
+                flex: 2;
+                display: flex;
+                flex-wrap: nowrap;
+                min-width: 100%;
+            }
+                .bottom-row .callout
+                {
+                    height: 100%;
+                    margin: 0;
+                }
+
+                    .over
+                    {
+                        overflow: auto;
+                        height: 100%;
+                    }
+                        .over pre
+                        {
+                            white-space: pre-wrap;
+                            word-wrap: break-word;
+                        }
+
+            .api-explorer input[type=text]
+            {
+                font-size: 0.85rem;
+            }
+                .api-explorer input.ng-valid[required]
+                {
+                    border-left: 5px solid #42A948;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                    padding-left: 5px;
+                }
+                .api-explorer input.ng-invalid
+                {
+                    border-left: 5px solid #a94442;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                    padding-left: 5px;
+                }
+        </style>
+    </head>
+
+
+    <body ng-app="app" ng-controller="MainController as $ctrl" ng-cloak>
+
+        <div class="container">
+            <div class="row top-row">
+                <div class="column">
+                    <h1>Angular-LastFM Explorer</h1>
+                </div>
+            </div>
+            <div class="row medium-unstack bottom-row">
+                <div class="medium-4 columns">
+
+                    <api-input api-methods="$ctrl.apiMethods" on-call="$ctrl.apiCall(data, params)"></api-input>
+                    
+                </div>
+                <div class="medium-8 columns">
+                    <div class="callout">
+                        <div class="over">
+                            <pre>{{$ctrl.output || json}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../src/angular.lastfm.js"></script>
+    <script src="index.js"></script>
+    <script src="components/api-input/api-input.component.js"></script>
+    <script src="components/api-input/mbid.directive.js"></script>
+    <script src="main.controller.js"></script>
+
+</html>

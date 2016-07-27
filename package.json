@@ -1,0 +1,70 @@
+{
+  "name": "angular-lastfm",
+  "version": "1.0.0",
+  "description": "An Angular LastFm API service",
+  "main": "src/angular-lastfm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikeybyker/angular-lastfm.git"
+  },
+  "keywords": [
+    "lastfm",
+    "angular",
+    "angularjs"
+  ],
+  "author": "Mike Doran",
+  "license": "MIT",
+  "devDependencies": {
+    "angular-mocks": "^1.5.0-beta.2",
+    "bower": "^1.7.9",
+    "del": "^2.0.2",
+    "es6-shim": "^0.35.0",
+    "eslint": "^2.11.0",
+    "eslint-config-xo-space": "^0.12.0",
+    "gulp": "gulpjs/gulp#4ed9a4a3275559c73a396eff7e1fde3824951ebb",
+    "gulp-eslint": "^2.0.0",
+    "gulp-inject": "^3.0.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.14",
+    "karma-jasmine": "^0.3.8",
+    "karma-junit-reporter": "^0.4.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-phantomjs-shim": "^1.1.2",
+    "karma-spec-reporter": "0.0.26",
+    "phantomjs-prebuilt": "^2.1.6",
+    "uglify-save-license": "^0.4.1"
+  },
+  "scripts": {
+    "build": "gulp",
+    "test": "gulp test",
+    "bower": "bower",
+    "prepublish": "gulp"
+  },
+  "eslintConfig": {
+    "globals": {
+      "expect": true,
+      "angular": true
+    },
+    "root": true,
+    "env": {
+      "browser": true,
+      "jasmine": true
+    },
+    "rules": {
+      "angular/on-watch": 0,
+      "no-unused-vars": 0,
+      "indent": 0,
+      "no-console": 0
+    },
+    "extends": [
+      "xo-space"
+    ]
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
