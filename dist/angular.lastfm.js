@@ -95,27 +95,6 @@
                         });
             }
 
-            // Docs: http://www.last.fm/api/show/album.search
-            function _searchAlbum(album, options){
-                var settings = {
-                            album: album,
-                            method: 'album.search'
-                            // limit: 10,
-                            // page: 1
-                    };
-                return http(settings, options);
-            }
-            // Return the actual albums found, rather than end user digging the data for them...
-            function searchAlbum(album, options){
-                return _searchAlbum.apply(_p, arguments)
-                    .then(function(response){
-                        if(response.data.error || !response.data.results || !response.data.results.albummatches){
-                            return reject(response, 'Couldn\'t find this album');
-                        }
-                        return response.data.results.albummatches.album;
-                    });
-            }
-
             // Docs: http://www.last.fm/api/show/album.getTopTags
             /*
                 Note: Docs say artist & album optional if mbid is used...
@@ -143,31 +122,29 @@
                     });
             }
 
-
-            // Artist
-
-            // Docs: http://www.last.fm/api/show/artist.getTopAlbums
-            function _getTopAlbums(artistOrMbid, options){
+            // Docs: http://www.last.fm/api/show/album.search
+            function _searchAlbum(album, options){
                 var settings = {
-                            artist: artistOrMbid,
-                            method: 'artist.gettopalbums'
-                            // mbid: mbid,
+                            album: album,
+                            method: 'album.search'
                             // limit: 10,
-                            // autocorrect: 1,
                             // page: 1
                     };
-                settings = getSettings(settings);
                 return http(settings, options);
             }
-            function getTopAlbums(artistOrMbid, options){
-                return _getTopAlbums.apply(_p, arguments)
+            // Return the actual albums found, rather than end user digging the data for them...
+            function searchAlbum(album, options){
+                return _searchAlbum.apply(_p, arguments)
                     .then(function(response){
-                        if(response.data.error || !response.data.topalbums){
-                            return reject(response, 'Couldn\'t find albums');
+                        if(response.data.error || !response.data.results || !response.data.results.albummatches){
+                            return reject(response, 'Couldn\'t find this album');
                         }
-                        return response.data.topalbums.album;
+                        return response.data.results.albummatches.album;
                     });
             }
+
+
+            // Artist
 
             // Docs: http://www.last.fm/api/show/artist.getInfo
             function _getArtistInfo(artistOrMbid, options){
@@ -188,26 +165,6 @@
                             return reject(response, 'Couldn\'t find artist');
                         }
                         return response.data.artist;
-                    });
-            }
-
-            // Docs: http://www.last.fm/api/show/artist.search
-            function _searchArtists(artist, options) {
-                var settings = {
-                            artist: artist,
-                            method: 'artist.search'
-                            // limit: 10,
-                            // page: 1
-                    };
-                return http(settings, options);
-            }
-            function searchArtists(artist, options) {
-                return _searchArtists.apply(_p, arguments)
-                    .then(function(response){
-                        if(response.data.error || !response.data.results || !response.data.results.artistmatches){
-                            return reject(response, 'Couldn\'t find artist');
-                        }
-                        return response.data.results.artistmatches.artist;
                     });
             }
 
@@ -233,6 +190,28 @@
                     });
             }
 
+            // Docs: http://www.last.fm/api/show/artist.getTopAlbums
+            function _getTopAlbums(artistOrMbid, options){
+                var settings = {
+                            artist: artistOrMbid,
+                            method: 'artist.gettopalbums'
+                            // mbid: mbid,
+                            // limit: 10,
+                            // autocorrect: 1,
+                            // page: 1
+                    };
+                settings = getSettings(settings);
+                return http(settings, options);
+            }
+            function getTopAlbums(artistOrMbid, options){
+                return _getTopAlbums.apply(_p, arguments)
+                    .then(function(response){
+                        if(response.data.error || !response.data.topalbums){
+                            return reject(response, 'Couldn\'t find albums');
+                        }
+                        return response.data.topalbums.album;
+                    });
+            }
 
             // Docs: http://www.last.fm/api/show/artist.getTopTags
             function _getArtistTopTags(artistOrMbid, options){
@@ -255,7 +234,6 @@
                     });
             }
 
-
             // Docs: http://www.last.fm/api/show/artist.getTopTracks
             function _getTopTracks(artistOrMbid, options){
                 var settings = {
@@ -276,6 +254,26 @@
                             return reject(response, 'Couldn\'t find tracks');
                         }
                         return response.data.toptracks.track;
+                    });
+            }
+
+            // Docs: http://www.last.fm/api/show/artist.search
+            function _searchArtists(artist, options) {
+                var settings = {
+                            artist: artist,
+                            method: 'artist.search'
+                            // limit: 10,
+                            // page: 1
+                    };
+                return http(settings, options);
+            }
+            function searchArtists(artist, options) {
+                return _searchArtists.apply(_p, arguments)
+                    .then(function(response){
+                        if(response.data.error || !response.data.results || !response.data.results.artistmatches){
+                            return reject(response, 'Couldn\'t find artist');
+                        }
+                        return response.data.results.artistmatches.artist;
                     });
             }
 
@@ -386,24 +384,25 @@
 
             // Track
 
-            // Docs: http://www.last.fm/api/show/track.search
-            function _searchTrack(track, options){
+            // Docs: http://www.last.fm/api/show/track.getInfo
+            function _getTrackInfo(artistOrMbid, track, options){
                 var settings = {
+                            artist: artistOrMbid,
                             track: track,
-                            method: 'track.search'
-                            // limit: 10,
-                            // page: 1
+                            method: 'track.getInfo'
+                            // mbid: mbid,
+                            // autocorrect: 1
                     };
+                settings = getSettings(settings);
                 return http(settings, options);
             }
-            function searchTrack(track, options){
-                // console.log(LastFMService.prototype);
-                return _searchTrack.apply(LastFMService.prototype, arguments)
+            function getTrackInfo(artistOrMbid, track, options){
+                return _getTrackInfo.apply(_p, arguments)
                     .then(function(response){
-                        if(response.data.error || !response.data.results || !response.data.results.trackmatches){
+                        if(response.data.error || !response.data.track){
                             return reject(response, 'Couldn\'t find track');
                         }
-                        return response.data.results.trackmatches.track;
+                        return response.data.track;
                     });
             }
 
@@ -452,27 +451,27 @@
                     });
             }
 
-            // Docs: http://www.last.fm/api/show/track.getInfo
-            function _getTrackInfo(artistOrMbid, track, options){
+            // Docs: http://www.last.fm/api/show/track.search
+            function _searchTrack(track, options){
                 var settings = {
-                            artist: artistOrMbid,
                             track: track,
-                            method: 'track.getInfo'
-                            // mbid: mbid,
-                            // autocorrect: 1
+                            method: 'track.search'
+                            // limit: 10,
+                            // page: 1
                     };
-                settings = getSettings(settings);
                 return http(settings, options);
             }
-            function getTrackInfo(artistOrMbid, track, options){
-                return _getTrackInfo.apply(_p, arguments)
+            function searchTrack(track, options){
+                // console.log(LastFMService.prototype);
+                return _searchTrack.apply(LastFMService.prototype, arguments)
                     .then(function(response){
-                        if(response.data.error || !response.data.track){
+                        if(response.data.error || !response.data.results || !response.data.results.trackmatches){
                             return reject(response, 'Couldn\'t find track');
                         }
-                        return response.data.track;
+                        return response.data.results.trackmatches.track;
                     });
             }
+
 
             function reject(response, reason){
                 var error = {
@@ -486,53 +485,50 @@
                 getParams :         getParams,
                 isMbid :            isMbid,
                 Album: {
-                    album:          getAlbumInfo,
+                    getInfo:        getAlbumInfo,
+                    getTopTags:     getAlbumTopTags,
                     search:         searchAlbum,
-                    topTags:        getAlbumTopTags,
-                    _album:         _getAlbumInfo,
-                    _search:        _searchAlbum,
-                    _topTags:       _getAlbumTopTags
+                    _getInfo:       _getAlbumInfo,
+                    _getTopTags:    _getAlbumTopTags,
+                    _search:        _searchAlbum
                 },
                 Artist: {
-                    albums:         getTopAlbums,
-                    artist:         getArtistInfo,
+                    getInfo:        getArtistInfo,
+                    getSimilar:     getSimilar,
+                    getTopAlbums:   getTopAlbums,
+                    getTopTags:     getArtistTopTags,
+                    getTopTracks:   getTopTracks,                    
                     search:         searchArtists,
-                    similar:        getSimilar,
-                    topTags:        getArtistTopTags,
-                    tracks:         getTopTracks,
-                    _albums:        _getTopAlbums,
-                    _artist:        _getArtistInfo,
-                    _search:        _searchArtists,
-                    _similar:       _getSimilar,
-                    _topTags:       _getArtistTopTags,
-                    _tracks:        _getTopTracks
+                    _getInfo:       _getArtistInfo,
+                    _getSimilar:    _getSimilar,
+                    _getTopAlbums:  _getTopAlbums,
+                    _getTopTags:    _getArtistTopTags,
+                    _getTopTracks:  _getTopTracks,
+                    _search:        _searchArtists
                 },
-                Charts: {
-                    topArtists:     getTopArtists,
-                    topTags:        getChartsTopTags,
-                    topTracks:      getChartsTopTracks,
-                    _topArtists:    _getTopArtists,
-                    _topTags:       _getChartsTopTags,
-                    _topTracks:     _getChartsTopTracks
-
+                Charts: {                    
+                    getTopArtists:  getTopArtists,
+                    getTopTags:     getChartsTopTags,
+                    getTopTracks:   getChartsTopTracks,                    
+                    _getTopArtists: _getTopArtists,
+                    _getTopTags:    _getChartsTopTags,
+                    _getTopTracks:  _getChartsTopTracks
                 },
                 Geo : {
-                    topArtists:     getTopGeoArtists,
-                    topTracks:      getTopGeoTracks,
-                    _topArtists:    _getTopGeoArtists,
-                    _topTracks:     _getTopGeoTracks
-
+                     getTopArtists:  getTopGeoArtists,
+                     getTopTracks:   getTopGeoTracks,                   
+                    _getTopArtists: _getTopGeoArtists,
+                    _getTopTracks:  _getTopGeoTracks
                 },
-                Track: {
+                Track: {                    
+                    getInfo:        getTrackInfo,
+                    getSimilar:     getSimilarTrack,
+                    getTopTags:     getTrackTopTags,
                     search:         searchTrack,
-                    similar:        getSimilarTrack,
-                    topTags:        getTrackTopTags,
-                    track:          getTrackInfo,
-                    _search:        _searchTrack,
-                    _similar:       _getSimilarTrack,
-                    _topTags:       _getTrackTopTags,
-                    _track:         _getTrackInfo
-
+                    _getInfo:       _getTrackInfo,
+                    _getSimilar:    _getSimilarTrack,
+                    _getTopTags:    _getTrackTopTags,
+                    _search:        _searchTrack
                 }
             }
 
