@@ -6,8 +6,7 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     uglifySaveLicense = require('uglify-save-license'),
     sourcemaps = require('gulp-sourcemaps'),
-    karma = require('karma'),
-    path = require('path');
+    karma = require('karma');
 
 gulp.task('build', function() {
     return gulp.src('src/angular.lastfm.js')
@@ -28,30 +27,14 @@ gulp.task('clean', function() {
     return del('dist/');
 });
 
-
-function runTests (singleRun, done) {
-  var reporters = ['spec'];
-  var preprocessors = {};
-
-  var localConfig = {
-    configFile: path.join(__dirname, '/karma.conf.js'),
-    singleRun: singleRun,
-    autoWatch: !singleRun,
-    reporters: reporters,
-    preprocessors: preprocessors
-  };
-
-  var server = new karma.Server(localConfig, function(failCount) {
-    done(failCount ? new Error('Failed ' + failCount + ' tests.') : null);
-  })
-  server.start();
-}
-
 /**
  * Run test once and exit
  */
-gulp.task('test', function(done) {
-    runTests(true, done);
+gulp.task('test', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 // gulp.task('default', gulp.series('clean', 'build')); gulp 4
