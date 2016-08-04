@@ -115,6 +115,6 @@ The following methods are available:
   - LastFM.Track.search(track, options);
 
 ### Version
-1.0.0
+1.1.0
 
 Mike

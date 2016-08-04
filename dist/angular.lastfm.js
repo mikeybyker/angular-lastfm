@@ -78,7 +78,8 @@
                 var settings = {
                             artist: artistOrMbid,
                             album: album,
-                            method: 'album.getinfo'                            // mbid: mbid,
+                            method: 'album.getinfo'
+                            // mbid: mbid,
                             // autocorrect: 1,
                             // lang: 'de'
                     };
@@ -86,7 +87,7 @@
                 return http(settings, options);
             }
             function getAlbumInfo(artistOrMbid, album, options){
-                return _getAlbumInfo.apply(_p, arguments)
+                return _getAlbumInfo.apply(this, arguments)
                         .then(function(response){
                             if(response.data.error || !response.data.album){
                                 return reject(response, 'Couldn\'t find this album');
@@ -111,9 +112,8 @@
                 settings = getSettings(settings);
                 return http(settings, options);
             }
-            //
             function getAlbumTopTags(artistOrMbid, album, options){
-                return _getAlbumTopTags.apply(_p, arguments)
+                return _getAlbumTopTags.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.toptags){
                             return reject(response, 'Error looking up tags');
@@ -134,7 +134,7 @@
             }
             // Return the actual albums found, rather than end user digging the data for them...
             function searchAlbum(album, options){
-                return _searchAlbum.apply(_p, arguments)
+                return _searchAlbum.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.results || !response.data.results.albummatches){
                             return reject(response, 'Couldn\'t find this album');
@@ -159,7 +159,7 @@
                 return http(settings, options);
             }
             function getArtistInfo(artistOrMbid, options){
-                return _getArtistInfo.apply(_p, arguments)
+                return _getArtistInfo.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.artist){
                             return reject(response, 'Couldn\'t find artist');
@@ -181,7 +181,7 @@
                 return http(settings, options);
             }
             function getSimilar(artistOrMbid, options){
-                return _getSimilar.apply(_p, arguments)
+                return _getSimilar.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.similarartists){
                             return reject(response, 'Couldn\'t find similar artists');
@@ -204,7 +204,7 @@
                 return http(settings, options);
             }
             function getTopAlbums(artistOrMbid, options){
-                return _getTopAlbums.apply(_p, arguments)
+                return _getTopAlbums.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.topalbums){
                             return reject(response, 'Couldn\'t find albums');
@@ -225,7 +225,7 @@
                 return http(settings, options);
             }
             function getArtistTopTags(artistOrMbid, options){
-                return _getArtistTopTags.apply(_p, arguments)
+                return _getArtistTopTags.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.toptags){
                             return reject(response, 'Couldn\'t find tags');
@@ -248,7 +248,7 @@
                 return http(settings, options);
             }
             function getTopTracks(artistOrMbid, options){
-                return _getTopTracks.apply(_p, arguments)
+                return _getTopTracks.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.toptracks){
                             return reject(response, 'Couldn\'t find tracks');
@@ -268,7 +268,7 @@
                 return http(settings, options);
             }
             function searchArtists(artist, options) {
-                return _searchArtists.apply(_p, arguments)
+                return _searchArtists.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.results || !response.data.results.artistmatches){
                             return reject(response, 'Couldn\'t find artist');
@@ -290,7 +290,7 @@
                 return http(settings, options);
             }
             function getTopArtists(options){
-                return _getTopArtists.apply(_p, arguments)
+                return _getTopArtists.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.artists){
                             return reject(response, 'Couldn\'t find artist');
@@ -309,7 +309,7 @@
                 return http(settings, options);
             }
             function getChartsTopTags(options){
-                return _getChartsTopTags.apply(_p, arguments)
+                return _getChartsTopTags.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.tags){
                             return reject(response, 'Couldn\'t find tags');
@@ -328,7 +328,7 @@
                 return http(settings, options);
             }
             function getChartsTopTracks(options){
-                return _getChartsTopTracks.apply(_p, arguments)
+                return _getChartsTopTracks.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.tracks){
                             return reject(response, 'Couldn\'t find tracks');
@@ -351,7 +351,7 @@
                 return http(settings, options);
             }
             function getTopGeoArtists(country, options){
-                return _getTopGeoArtists.apply(_p, arguments)
+                return _getTopGeoArtists.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.topartists){
                             return reject(response, 'Couldn\'t find artists');
@@ -372,7 +372,7 @@
                 return http(settings, options);
             }
             function getTopGeoTracks(country, options){
-                return _getTopGeoTracks.apply(_p, arguments)
+                return _getTopGeoTracks.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.tracks){
                             return reject(response, 'Couldn\'t find tracks');
@@ -397,7 +397,7 @@
                 return http(settings, options);
             }
             function getTrackInfo(artistOrMbid, track, options){
-                return _getTrackInfo.apply(_p, arguments)
+                return _getTrackInfo.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.track){
                             return reject(response, 'Couldn\'t find track');
@@ -420,7 +420,7 @@
                 return http(settings, options);
             }
             function getSimilarTrack(artistOrMbid, track, options){
-                return _getSimilarTrack.apply(_p, arguments)
+                return _getSimilarTrack.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.similartracks){
                             return reject(response, 'Couldn\'t find similar tracks');
@@ -428,7 +428,7 @@
                         return response.data.similartracks.track;
                     });
             }
-
+//@todo artist > artistOrMbid
             // Docs: http://www.last.fm/api/show/track.getTopTags
             function _getTrackTopTags(artist, track, options){
                 var settings = {
@@ -442,7 +442,7 @@
                 return http(settings, options);
             }
             function getTrackTopTags(artist, track, options){
-                return _getTrackTopTags.apply(_p, arguments)
+                return _getTrackTopTags.apply(this, arguments)
                     .then(function(response){
                         if(response.data.error || !response.data.toptags){
                             return reject(response, 'Couldn\'t find tags');
@@ -485,50 +485,50 @@
                 getParams :         getParams,
                 isMbid :            isMbid,
                 Album: {
-                    getInfo:        getAlbumInfo,
-                    getTopTags:     getAlbumTopTags,
-                    search:         searchAlbum,
-                    _getInfo:       _getAlbumInfo,
-                    _getTopTags:    _getAlbumTopTags,
-                    _search:        _searchAlbum
+                    getInfo:        getAlbumInfo.bind(this),
+                    getTopTags:     getAlbumTopTags.bind(this),
+                    search:         searchAlbum.bind(this),
+                    _getInfo:       _getAlbumInfo.bind(this),
+                    _getTopTags:    _getAlbumTopTags.bind(this),
+                    _search:        _searchAlbum.bind(this)
                 },
                 Artist: {
-                    getInfo:        getArtistInfo,
-                    getSimilar:     getSimilar,
-                    getTopAlbums:   getTopAlbums,
-                    getTopTags:     getArtistTopTags,
-                    getTopTracks:   getTopTracks,                    
-                    search:         searchArtists,
-                    _getInfo:       _getArtistInfo,
-                    _getSimilar:    _getSimilar,
-                    _getTopAlbums:  _getTopAlbums,
-                    _getTopTags:    _getArtistTopTags,
-                    _getTopTracks:  _getTopTracks,
-                    _search:        _searchArtists
+                    getInfo:        getArtistInfo.bind(this),
+                    getSimilar:     getSimilar.bind(this),
+                    getTopAlbums:   getTopAlbums.bind(this),
+                    getTopTags:     getArtistTopTags.bind(this),
+                    getTopTracks:   getTopTracks.bind(this),                    
+                    search:         searchArtists.bind(this),
+                    _getInfo:       _getArtistInfo.bind(this),
+                    _getSimilar:    _getSimilar.bind(this),
+                    _getTopAlbums:  _getTopAlbums.bind(this),
+                    _getTopTags:    _getArtistTopTags.bind(this),
+                    _getTopTracks:  _getTopTracks.bind(this),
+                    _search:        _searchArtists.bind(this)
                 },
                 Charts: {                    
-                    getTopArtists:  getTopArtists,
-                    getTopTags:     getChartsTopTags,
-                    getTopTracks:   getChartsTopTracks,                    
-                    _getTopArtists: _getTopArtists,
-                    _getTopTags:    _getChartsTopTags,
-                    _getTopTracks:  _getChartsTopTracks
+                    getTopArtists:  getTopArtists.bind(this),
+                    getTopTags:     getChartsTopTags.bind(this),
+                    getTopTracks:   getChartsTopTracks.bind(this),                    
+                    _getTopArtists: _getTopArtists.bind(this),
+                    _getTopTags:    _getChartsTopTags.bind(this),
+                    _getTopTracks:  _getChartsTopTracks.bind(this)
                 },
                 Geo : {
-                     getTopArtists:  getTopGeoArtists,
-                     getTopTracks:   getTopGeoTracks,                   
-                    _getTopArtists: _getTopGeoArtists,
-                    _getTopTracks:  _getTopGeoTracks
+                     getTopArtists:  getTopGeoArtists.bind(this),
+                     getTopTracks:   getTopGeoTracks.bind(this),                   
+                    _getTopArtists: _getTopGeoArtists.bind(this),
+                    _getTopTracks:  _getTopGeoTracks.bind(this)
                 },
                 Track: {                    
-                    getInfo:        getTrackInfo,
-                    getSimilar:     getSimilarTrack,
-                    getTopTags:     getTrackTopTags,
-                    search:         searchTrack,
-                    _getInfo:       _getTrackInfo,
-                    _getSimilar:    _getSimilarTrack,
-                    _getTopTags:    _getTrackTopTags,
-                    _search:        _searchTrack
+                    getInfo:        getTrackInfo.bind(this),
+                    getSimilar:     getSimilarTrack.bind(this),
+                    getTopTags:     getTrackTopTags.bind(this),
+                    search:         searchTrack.bind(this),
+                    _getInfo:       _getTrackInfo.bind(this),
+                    _getSimilar:    _getSimilarTrack.bind(this),
+                    _getTopTags:    _getTrackTopTags.bind(this),
+                    _search:        _searchTrack.bind(this)
                 }
             }
 
