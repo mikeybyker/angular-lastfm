@@ -40,7 +40,7 @@ LastFM.Artist.getTopAlbums('The Cure')
     });
 ```
 
-Send in an object to set any options - see [Last.FM](http://www.last.fm/api) for each call.
+Send in an object to set any options - see [Last.FM](http://www.last.fm/api) for options available for each call.
 
 ```javascript
 // e.g.
@@ -52,7 +52,7 @@ LastFM.Artist.getSimilar('The Cure', {limit: 10})
 
 ### MusicBrainz Identifier
 
-If a [MusicBrainz Identifier](https://musicbrainz.org/doc/MusicBrainz_Identifier) (mbid) is accepted by a method, the other parameters are not required.
+If a [MusicBrainz Identifier](https://musicbrainz.org/doc/MusicBrainz_Identifier) (mbid) is accepted by a method, the other parameters are not required. An mbid always takes precedence over other parameters.
 
 ```javascript
 // e.g.
